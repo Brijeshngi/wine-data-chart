@@ -1,0 +1,51 @@
+
+  const allAlcoholData = data.map((data) => data.Alcohol);
+
+  // console.log(allAlcoholData)
+
+  const unique = new Set(allAlcoholData);
+  const newArrAfterSet = [...unique];
+  // ===================================================================
+  let Temp = {};
+
+  data.forEach((item) => {
+    const AlcoholDataOccurance = data.filter((data) => data.Alcohol === item.Alcohol);
+
+    // console.log("dataaaaaaaa",AlcoholDataOccurance)
+
+    const arrayOfMalicAcid = AlcoholDataOccurance.map((data) => data.Malic_Acid);
+
+    // console.log(arrayOfMalicAcid)
+
+    let sum = 0;
+
+    arrayOfMalicAcid.forEach((data) => {
+      sum = sum + data;
+    });
+
+    Temp = {...Temp,[item.Alcohol]: {
+        avg: parseFloat((sum / arrayOfMalicAcid.length).toFixed(2)),
+        sum: parseFloat(sum.toFixed(2)),
+        total: arrayOfMalicAcid.length,
+      },
+    };
+  });
+
+  console.log(Temp);
+
+  var resultArray = Object.keys(Temp).map(function(personNamedIndex){
+    let person = Temp[personNamedIndex];
+    // do something with person
+    return person;
+});
+// console.log(resultArray)
+
+const fullArray = resultArray.map((data)=>{return data.avg})
+
+console.log(fullArray)
+  
+
+  
+  // console.log(newArray)
+
+  // console.log("all data after import", newArrAfterSet);
